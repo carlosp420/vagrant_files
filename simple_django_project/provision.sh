@@ -2,8 +2,6 @@
 
 # Script to set up dependencies for Django on Vagrant.
 
-PGSQL_VERSION=9.3
-
 # Need to fix locale so that Postgres creates databases in UTF-8
 cp -p vagrant_data/etc-bash.bashrc /etc/bash.bashrc
 locale-gen en_GB.UTF-8
@@ -90,7 +88,7 @@ fi
 echo '#!/bin/bash
 
 NAME="website"                                  # Name of the application
-DJANGODIR=/home/vagrant/website                      # Django project directory
+DJANGODIR=/home/vagrant/website/website                      # Django project directory
 SOCKFILE=/home/vagrant/run/gunicorn.sock           # we will communicte using this unix socket
 USER=vagrant                                        # the user to run as
 GROUP=vagrant                                     # the group to run as
@@ -209,7 +207,7 @@ echo '
     }
 ' > /etc/nginx/sites-available/website
 
-if [[ /etc/nginx/sites-enabled/website ]]; then
+if [[ -f /etc/nginx/sites-enabled/website ]]; then
     unlink /etc/nginx/sites-enabled/website
 fi
 
