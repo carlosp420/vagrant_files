@@ -48,7 +48,7 @@ cp -p vagrant_data/bashrc /home/vagrant/.bashrc
 apt-get clean
 
 
-# Virtualenv for VoSeq
+# Virtualenv for website
 if [[ ! -e /home/vagrant/.virtualenvs/website ]]; then
     su - vagrant -c "source /usr/local/bin/virtualenvwrapper.sh &&            \
         mkvirtualenv -p /usr/bin/python3 website && \
@@ -58,7 +58,7 @@ if [[ ! -e /home/vagrant/.virtualenvs/website ]]; then
         pip install setproctitle "
 fi
 
-# config.json file for VoSeq
+# config.json file for website
 if [[ ! -e /home/vagrant/website ]]; then
     mkdir /home/vagrant/website
 fi
@@ -162,11 +162,11 @@ echo '
         error_log /home/vagrant/logs/nginx-error.log;
     
         location /static/ {
-            alias   /var/www/VoSeq/static/;
+            alias   /var/www/website/static/;
         }
         
         location /media/ {
-            alias   /var/www/VoSeq/media/;
+            alias   /var/www/website/media/;
         }
     
         location / {
@@ -204,7 +204,7 @@ echo '
         # Error pages
         error_page 500 502 503 504 /500.html;
         location = /500.html {
-            root /var/www/VoSeq/static/;
+            root /var/www/website/static/;
         }
     }
 ' > /etc/nginx/sites-available/website
