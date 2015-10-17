@@ -65,7 +65,7 @@ apt-get clean
 
 # Clone Voseq if necessary
 if [[ ! -f /vagrant/requirements/base.txt ]]; then
-    cd ~ && \
+    cd /home/vagrant && \
         git clone https://github.com/carlosp420/VoSeq.git && \
         rsync -au VoSeq/* /vagrant/. && \
         rm -rf VoSeq
@@ -83,7 +83,8 @@ if [[ ! -e /home/vagrant/.virtualenvs/voseq ]]; then
         pip install setproctitle "
 fi
 
-cd /vagrant/ && make collectstatic
+su - vagrant -c "source /home/vagrant/.virtualenvs/voseq/bin/activate && \
+    cd /vagrant/ && make collectstatic "
 
 # config.json file for VoSeq
 if [[ ! -f /vagrant/config.json ]]; then
