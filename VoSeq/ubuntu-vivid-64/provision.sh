@@ -83,6 +83,7 @@ if [[ ! -e /home/vagrant/.virtualenvs/voseq ]]; then
         pip install setproctitle "
 fi
 
+sudo mkdir /var/www/VoSeq && sudo chown vagrant:vagrant -R /var/www/VoSeq
 su - vagrant -c "source /home/vagrant/.virtualenvs/voseq/bin/activate && \
     cd /vagrant/ && make collectstatic "
 
